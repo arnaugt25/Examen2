@@ -45,8 +45,7 @@ class ProductoController extends Controller
         Producto::create($validated);
 
         // Redireccionar a la lista con mensaje de éxito
-        return redirect()->route('productos.index')
-                         ->with('success', 'Producto creado con éxito');
+        return redirect()->route('productos.index')->with('success', 'Producto creado con éxito');
     }
 
     /**
@@ -88,8 +87,7 @@ class ProductoController extends Controller
         $producto->update($validated);
 
         // Redireccionar a la lista con mensaje de éxito
-        return redirect()->route('productos.index')
-                         ->with('success', 'Producto actualizado con éxito');
+        return redirect()->route('productos.index')->with('success', 'Producto actualizado con éxito');
     }
 
     /**
@@ -101,7 +99,6 @@ class ProductoController extends Controller
         $producto->delete();
 
         // Redireccionar a la lista con mensaje de éxito
-        return redirect()->route('productos.index')
-                         ->with('success', 'Producto eliminado con éxito');
+        return redirect()->route('productos.index')->with('success', 'Producto eliminado con éxito');
     }
 }
