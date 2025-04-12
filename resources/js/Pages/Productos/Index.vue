@@ -85,11 +85,3 @@ function eliminarProducto(id) {
     }
 }
 </script>
-
-<style>
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-
-.material-icons {
-    font-size: 16px;
-}
-</style> 
