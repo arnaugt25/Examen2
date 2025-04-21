@@ -1,11 +1,15 @@
 <template>
     <div class="bg-gray-300 text-center text-black">
         Deportes:
+        <button @click="goToCreateList" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+                Crear Deporte
+        </button>
         <div>
             <table class="w-full border">
                 <tr>
                     <th class="p-2 text-left">ID</th>
                     <th class="p-2 text-left">name</th>
+                    <th class="p-2 text-left">Description</th>
                     <th class="p-2 text-left">Category</th>
                     <th class="p-2 text-left">Acciones</th>
                 </tr>
@@ -42,5 +46,9 @@ const props = defineProps({
 
 function deleteSport(id){
     router.delete(route('sport.destroy', id))
+}
+
+function goToCreateList(){
+    router.visit('/sport/create');
 }
 </script>

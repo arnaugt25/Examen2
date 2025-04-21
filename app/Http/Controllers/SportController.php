@@ -77,9 +77,9 @@ class SportController extends Controller
     public function update(Request $request, Sport $sport)
     {
         $validate = $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required|max:255',
-            'category_id' => 'required|max:255',
+            'name' => 'max:255',
+            'description' => 'max:255',
+            'category_id' => 'max:255',
         ]);
 
         if ($request->hasFile('image')) {

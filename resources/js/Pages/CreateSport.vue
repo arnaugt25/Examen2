@@ -56,16 +56,20 @@
                     <input
                         type="file"
                         id="image"
-                        @input="form.image = $event.target.files[0]"
+                        @input="handleImageChange"
                         class="w-full border p-2 rounded"
                         accept="image/*"
                     />
+                    <div class="p-2 text-left">
+                        <img v-if="previewImage" class="w-20" :src="previewImage" :alt="form.name">
+                    </div>
+
                 </div>
 
                 <div class="flex justify-between mt-4">
-                    <!-- <Link :href="route('')" class="bg-gray-300 px-3 py-1 rounded">
+                    <Link :href="route('sport.index')" class="bg-gray-300 px-3 py-1 rounded">
                         Cancelar
-                    </Link> -->
+                    </Link>
                     <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded">
                         Guardar
                     </button>
@@ -77,11 +81,14 @@
 
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3';
-import { defineProps } from 'vue';
+import { defineProps , onMounted, ref } from 'vue';
 
 const props = defineProps({
     categories: Array,
 });
+
+const previewImage = ref(null);
+
 
 const form = useForm({
     name: '',    
@@ -89,6 +96,15 @@ const form = useForm({
     category_id: '',
     image: '',
 });
+
+const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    form.image = file;
+    
+    if (file) {
+        previewImage.value = URL.createObjectURL(file);
+    }
+};
 
 function submit() {
     form.post(route('sport.store'));

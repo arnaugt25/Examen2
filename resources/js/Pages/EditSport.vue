@@ -34,11 +34,14 @@
                     <input
                         type="file"
                         id="image"
-                        @input="form.image = $event.target.files[0]"
+                        @input="handleImageChange"
                         class="w-full border p-2 rounded"
                         accept="image/*"
                     />
-                    <div class="p-2 text-left"><img class="w-20" :src="`/storage/${sport.image}`" :alt="sport.name"></div>
+                    <div class="p-2 text-left">
+                        <img v-if="previewImage" class="w-20" :src="previewImage" :alt="form.name">
+                        <img v-else-if="sport.image" class="w-20" :src="`/storage/${sport.image}`" :alt="sport.name">
+                    </div>
                 </div>
 
                 <div class="flex justify-between mt-4">
@@ -56,12 +59,14 @@
 
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3';
-import { defineProps, onMounted } from 'vue';
+import { defineProps, onMounted, ref } from 'vue';
 
 const props = defineProps({
     sport: Object,
     categories: Array,
 });
+
+const previewImage = ref(null);
 
 const form = useForm({
     name: '',
@@ -70,6 +75,15 @@ const form = useForm({
     image: '',
     _method: 'put',
 });
+
+const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    form.image = file;
+    
+    if (file) {
+        previewImage.value = URL.createObjectURL(file);
+    }
+};
 
 onMounted(() => {
     if (props.sport) {
