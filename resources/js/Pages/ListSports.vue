@@ -18,7 +18,7 @@
                         <td class="p-2 text-left">{{ sport.id }}</td>
                         <td class="p-2 text-left">{{ sport.name }}</td>
                         <td class="p-2 text-left">{{ sport.description }}</td>
-                        <td class="p-2 text-left">{{ sport.category.name}}</td>
+                        <td class="p-2 text-left">{{ sport.category?.name || 'No Category' }}</td>
                         <td class="p-2 text-left"><img class="w-20" :src="`/storage/${sport.image}`" :alt="sport.name"></td>
                         <td class="p-2">
                             <div class="flex gap-2">

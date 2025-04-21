@@ -34,7 +34,7 @@
 
             <div class="absolute bottom-0 w-full bg-black bg-opacity-50 text-white p-4">
                 <div class="text-center text-lg font-semibold">
-                    {{ props.sports[currentIndex].name }} - {{ props.sports[currentIndex].category.name }}
+                    {{ props.sports[currentIndex].name }} - {{ props.sports[currentIndex].category?.name || 'No Category' }}
                 </div>
             </div>
 
