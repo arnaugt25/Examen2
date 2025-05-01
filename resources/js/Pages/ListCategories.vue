@@ -29,13 +29,24 @@
 
 <script setup>
 import { Head, Link, router } from '@inertiajs/vue3';
-import { defineProps } from 'vue';
+import {ref,defineProps} from 'vue';
+import axios from 'axios';
 
 const props = defineProps({
     categories: Array,
 });
 
-function deleteCategory(id){
-    router.delete(route('categories.destroy', id));
+// function deleteCategory(id){
+//     router.delete(route('categories.destroy', id));
+// }
+
+const categories = ref(props.categories);
+
+function deleteCategory(id) {
+  axios.post(`/categories/${id}`, {
+    _method: 'DELETE'
+  }).then(() => {
+    categories.value = categories.value.filter(category => category.id !== id);
+  });
 }
 </script>

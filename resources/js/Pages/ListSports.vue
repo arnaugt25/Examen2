@@ -39,13 +39,25 @@
 
 <script setup>
 import { Head, Link, router } from '@inertiajs/vue3';
+import {ref,defineProps} from 'vue';
+import axios from 'axios';
 
 const props = defineProps({
     sports: Array,
 });
 
-function deleteSport(id){
-    router.delete(route('sport.destroy', id))
+// function deleteSport(id){
+//     router.delete(route('sport.destroy', id))
+// }
+
+const sports = ref(props.sports);
+
+function deleteSport(id) {
+  axios.post(`/sport/${id}`, {
+    _method: 'DELETE'
+  }).then(() => {
+    sports.value = sports.value.filter(sport => sport.id !== id);
+  });
 }
 
 function goToCreateList(){
