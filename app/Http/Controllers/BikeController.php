@@ -73,7 +73,7 @@ class BikeController extends Controller
         $validate = $request->validate([
             'name' => 'required|max:255',
             'description' => 'required|max:255',
-            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable'
         ]);
 
         if (!$request->hasFile('image')) {
