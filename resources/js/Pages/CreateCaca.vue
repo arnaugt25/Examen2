@@ -73,7 +73,7 @@ const props = defineProps({
 });
 
 const previewImage = ref(null);
-
+const previewAudio = ref(null);
 
 const form = useForm({
     name: '',    

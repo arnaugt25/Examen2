@@ -21,7 +21,7 @@
                     <td class="text-left p-2 border border-black">{{ caca.name}}</td>
                     <td class="text-left p-2 border border-black">{{ caca.description }}</td>
                     <td class="p-2 text-left border border-black"><img class="w-20" :src="`/storage/${caca.image}`" :alt="caca.name"></td>
-                    <td class="text-left border border-black"><audio :src="`/storage/${caca.audio}`" controls></audio></td>
+                    <td class="text-left border border-black"><audio :src="`/storage/${caca.audio}`" controls class="w-full"></audio></td>
                     <td>
                         <div class="flex gap-2">
                             <Link :href="route('caca.show', caca.id)" class="ml-2 text-green-500 font-bold">Ver</Link>
