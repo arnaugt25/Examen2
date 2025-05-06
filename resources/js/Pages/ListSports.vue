@@ -1,9 +1,18 @@
 <template>
+    <div class="search-container">
+        <input 
+        type="text" 
+        v-model="search" 
+        placeholder="Buscar por nombre o categorÃa..." 
+        class="px-4 py-2 border rounded-lg shadow-sm"
+        />
+    </div>
     <div class="bg-gray-300 text-center text-black">
         Deportes:
         <button @click="goToCreateList" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
                 Crear Deporte
         </button>
+  
         <div>
             <table class="w-full border">
                 <tr>
@@ -14,7 +23,7 @@
                     <th class="p-2 text-left">Acciones</th>
                 </tr>
                 
-                    <tr class="border-t" v-for="sport in sports" :key="sport.id">
+                    <tr class="border-t" v-for="sport in filteredSports" :key="sport.id">
                         <td class="p-2 text-left">{{ sport.id }}</td>
                         <td class="p-2 text-left">{{ sport.name }}</td>
                         <td class="p-2 text-left">{{ sport.description }}</td>
@@ -34,33 +43,43 @@
             </table>
         </div>
     </div>
-</template>
-
-
-<script setup>
-import { Head, Link, router } from '@inertiajs/vue3';
-import {ref,defineProps} from 'vue';
-import axios from 'axios';
-
-const props = defineProps({
+  </template>
+  
+  
+  <script setup>
+  import { Head, Link, router } from '@inertiajs/vue3';
+  import {ref,defineProps, computed} from 'vue';
+  import axios from 'axios';
+  
+  const props = defineProps({
     sports: Array,
-});
-
-// function deleteSport(id){
-//     router.delete(route('sport.destroy', id))
-// }
-
-const sports = ref(props.sports);
-
-function deleteSport(id) {
+  });
+  
+  const search = ref('')
+  
+  // function deleteSport(id){
+  //     router.delete(route('sport.destroy', id))
+  // }
+  
+  const sports = ref(props.sports);
+  
+  function deleteSport(id) {
   axios.post(`/sport/${id}`, {
     _method: 'DELETE'
   }).then(() => {
     sports.value = sports.value.filter(sport => sport.id !== id);
   });
-}
-
-function goToCreateList(){
+  }
+  
+  function goToCreateList(){
     router.visit('/sport/create');
-}
-</script>
+  }
+  
+  const filteredSports = computed(() =>
+  props.sports.filter(sport =>
+    sport.name.toLowerCase().includes(search.value.toLowerCase()) ||
+    (sport.category && sport.category.name &&
+      sport.category.name.toLowerCase().includes(search.value.toLowerCase()))
+  )
+  );
+  </script>
