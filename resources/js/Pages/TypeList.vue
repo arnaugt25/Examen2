@@ -1,4 +1,5 @@
 <template>
+    <Navbar/>
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="text-center m-4">
             <h1 class="font-bold text-xl mb-2">Lista de Tipo de instrumento</h1>
@@ -34,6 +35,7 @@
 import { Head, Link, router } from '@inertiajs/vue3';
 import {ref,defineProps} from 'vue';
 import axios from 'axios';
+import Navbar from '@/Components/Navbar.vue';
 
 const props = defineProps({
     types: Array

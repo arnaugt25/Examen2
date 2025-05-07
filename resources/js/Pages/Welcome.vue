@@ -1,4 +1,5 @@
 <template>
+    <Navbar/>
     <div class="bg-gray-300 text-center text-black">
         Deportes:
         <div>
@@ -26,6 +27,7 @@
 
 <script setup>
 import { router } from '@inertiajs/vue3';
+import Navbar from '@/Components/Navbar.vue';
 
 const goToCreateList = () => {
     router.visit('/instrument/create');

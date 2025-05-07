@@ -1,8 +1,9 @@
 <template>
+    <Navbar/>
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="text-center m-4">
-            <h1 class="font-bold text-xl mb-2">Lista de Tipo de instrumento</h1>
-            <button @click="CrearType" class="bg-gray-400 py-2 px-4 rounded-lg">Crear Tipo de instrumento</button>
+            <h1 class="font-bold text-xl mb-2">Lista de instrumento</h1>
+            <button @click="CrearType" class="bg-gray-400 py-2 px-4 rounded-lg">Crear instrumento</button>
         </div>
         <div class="mb-4">
             <input type="text" v-model="search" placeholder="Buscar por nombre o categoria"
@@ -83,6 +84,7 @@
 import { Head, Link, router } from '@inertiajs/vue3';
 import {ref,defineProps, computed, onMounted, onUnmounted} from 'vue';
 import axios from 'axios';
+import Navbar from '@/Components/Navbar.vue';
 
 const props = defineProps({
     instruments: Array
