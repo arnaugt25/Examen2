@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\InstrumentController;
+use App\Models\Instrument;
+use App\Models\Type;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -13,6 +15,8 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'instruments' => Instrument::with('type')->get(),
+        'types' => Type::all(),
     ]);
 });
 
